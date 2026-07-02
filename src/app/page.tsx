@@ -21,7 +21,7 @@ const sampleListing = {
 
 export default function Home() {
   return (
-    <div className="bg-[#F8F6F2]">
+    <div className="bg-[#F8F6F2] w-full overflow-x-hidden position-relative">
       {/* 1. HERO SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 text-center md:text-left">
         <div className="max-w-3xl">

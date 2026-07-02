@@ -1,27 +1,22 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Sakeng Livestock Marketplace",
-  description: "Highly optimized premium livestock marketplace platform",
+export const metadata = {
+  title: "Sakeng Livestock",
+  description: "Lesotho's Trusted Livestock Marketplace",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      {/* Set your exact global background color #F8F6F2 */}
-      <body className={`${inter.className} bg-[#F8F6F2] text-[#3F564C] flex flex-col min-h-screen antialiased`}>
+    <html lang="en" className="overflow-x-hidden scroll-smooth">
+      <body className="antialiased bg-[#F8F6F2] text-[#3F564C] min-h-screen flex flex-col overflow-x-hidden relative w-full">
         <Header />
-        <main className="flex-grow">
+        <main className="flex-grow w-full overflow-x-hidden">
           {children}
         </main>
         <Footer />
