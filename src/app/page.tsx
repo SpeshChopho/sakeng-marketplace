@@ -1,6 +1,6 @@
 import LivestockCard from "./components/LivestockCard";
 
-// Mock data configuration structure using your official contact info
+// Mock data configuration structure using the official contact info
 const sampleListing = {
   id: "test-uuid-123",
   serial_id: "SKG-001",
@@ -21,25 +21,49 @@ const sampleListing = {
 
 export default function Home() {
   return (
-    <div className="bg-[#F8F6F2] w-full overflow-x-hidden position-relative">
-      {/* 1. HERO SECTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 text-center md:text-left">
-        <div className="max-w-3xl">
-          <h1 className="text-4xl sm:text-5xl font-black text-[#20352E] tracking-tight leading-none">
-            Lesotho’s Trusted <br className="hidden sm:inline" />
-            <span className="text-[#3D7A5E]">Livestock Marketplace</span>
-          </h1>
-          <p className="mt-6 text-[#3F564C] text-base sm:text-lg font-medium leading-relaxed max-w-2xl">
-            Browse verified livestock listings from across Lesotho. Connect directly with Sakeng via WhatsApp to inquire, arrange a viewing, and make a purchase with confidence.
-          </p>
-          <div className="mt-8">
-            <a 
-              href="#listings" 
-              className="inline-block bg-[#3D7A5E] text-white px-8 py-4 rounded-xl font-black text-sm tracking-wide shadow-xs hover:bg-[#285F44] transition-all transform active:scale-95"
-            >
-              Browse Livestock
-            </a>
+    <div className="bg-[#F8F6F2] w-full overflow-x-hidden relative">
+      
+      {/* 1. HERO SECTION (Balanced Dual Column Layout) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-20 pb-16 md:pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          {/* Left Column: Text Content */}
+          <div className="lg:col-span-7 text-center md:text-left order-2 lg:order-1">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#20352E] tracking-tight leading-tight">
+              Lesotho’s Trusted <br />
+              <span className="text-[#3D7A5E]">Livestock Marketplace</span>
+            </h1>
+            <p className="mt-6 text-[#3F564C] text-base sm:text-lg font-medium leading-relaxed max-w-2xl mx-auto md:mx-0">
+              Browse verified livestock listings from across Lesotho. Connect directly with Sakeng via WhatsApp to inquire, arrange a viewing, and make a purchase with confidence.
+            </p>
+            <div className="mt-8 flex justify-center md:justify-start">
+              <a 
+                href="#listings" 
+                className="inline-block bg-[#3D7A5E] text-white px-8 py-4 rounded-xl font-black text-sm tracking-wide shadow-xs hover:bg-[#285F44] transition-all transform active:scale-95"
+              >
+                Browse Livestock
+              </a>
+            </div>
           </div>
+
+          {/* Right Column: Visual Balance Element */}
+          <div className="lg:col-span-5 order-1 lg:order-2">
+            <div className="relative w-full h-64 sm:h-80 lg:h-[400px] rounded-[2rem] overflow-hidden border-4 border-white shadow-md transform lg:rotate-1 hover:rotate-0 transition-transform duration-300">
+              <img 
+                src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=1000&q=80" 
+                alt="Premium Livestock Marketplace"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#20352E]/30 to-transparent"></div>
+              
+              {/* Trust Badge Pin */}
+              <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-xs py-2 px-4 rounded-xl border border-[#E5E7EB]">
+                <span className="text-[10px] font-black tracking-wider text-[#20352E] uppercase block">Coverage</span>
+                <span className="text-xs font-bold text-[#3D7A5E] block">100% Nationwide Lesotho</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -47,7 +71,7 @@ export default function Home() {
       <section className="bg-white border-y border-[#E5E7EB] py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <span className="text-[11px] font-black tracking-widest text-[#6D8077] uppercase block text-center md:text-left mb-3">
-            Browse by Category
+            Browse Livestock by Category
           </span>
           <div className="flex flex-wrap justify-center md:justify-start gap-3">
             {['Cattle', 'Sheep', 'Goats', 'Pigs', 'Poultry'].map((cat) => (
