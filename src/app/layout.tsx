@@ -18,15 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-zinc-50 text-zinc-950 flex flex-col min-h-screen`}>
-        {/* Navigation Wrapper */}
+      {/* Set your exact global background color #F8F6F2 */}
+      <body className={`${inter.className} bg-[#F8F6F2] text-[#3F564C] flex flex-col min-h-screen antialiased`}>
         <Header />
-        
         <main className="flex-grow">
           {children}
         </main>
-        
-        {/* Footnote Wrapper */}
         <Footer />
       </body>
     </html>

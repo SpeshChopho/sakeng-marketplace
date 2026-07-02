@@ -7,9 +7,10 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="bg-[#1C243A] text-white sticky top-0 z-50 shadow-md border-b border-white/5">
+    // Header container with white background and your specific E5EFEB border line
+    <header className="bg-white text-[#3F564C] sticky top-0 z-50 border-b border-[#E5EFEB]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20"> {/* Comfortable height for your logo badge */}
+        <div className="flex items-center justify-between h-20">
           
           {/* Logo Brand Frame */}
           <div className="flex-shrink-0 flex items-center">
@@ -24,18 +25,18 @@ export default function Header() {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-lg font-black tracking-wider text-[#E5AA27] leading-none">SAKENG</span>
-                <span className="text-zinc-400 text-[10px] font-bold tracking-widest mt-0.5 uppercase">Livestock</span>
+                <span className="text-lg font-black tracking-wider text-[#20352E] leading-none">SAKENG</span>
+                <span className="text-[#6D8077] text-[10px] font-bold tracking-widest mt-0.5 uppercase">Livestock</span>
               </div>
             </Link>
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex space-x-8 items-center text-sm font-semibold">
-            <Link href="/" className="hover:text-[#E5AA27] text-zinc-200 transition-colors">Marketplace</Link>
-            <Link href="#" className="hover:text-[#E5AA27] text-zinc-200 transition-colors">How It Works</Link>
-            <Link href="#" className="hover:text-[#E5AA27] text-zinc-200 transition-colors">About Us</Link>
-            <Link href="#" className="bg-[#E5AA27] text-[#1C243A] px-5 py-2.5 rounded-xl font-black hover:bg-yellow-500 transition-all shadow-sm transform active:scale-95">
+          <nav className="hidden md:flex space-x-8 items-center text-sm font-bold">
+            <Link href="/" className="text-[#20352E] hover:text-[#3D7A5E] transition-colors">Marketplace</Link>
+            <Link href="#" className="text-[#3F564C] hover:text-[#20352E] transition-colors">How It Works</Link>
+            <Link href="#" className="text-[#3F564C] hover:text-[#20352E] transition-colors">About Us</Link>
+            <Link href="#" className="bg-[#3D7A5E] text-white px-5 py-2.5 rounded-xl font-black hover:bg-[#285F44] transition-all shadow-xs transform active:scale-95">
               Enlist Livestock
             </Link>
           </nav>
@@ -44,7 +45,8 @@ export default function Header() {
           <div className="md:hidden">
             <button 
               onClick={() => setIsOpen(!isOpen)} 
-              className="inline-flex items-center justify-center p-2 rounded-xl bg-white/5 hover:text-[#E5AA27] focus:outline-none"
+              // Burger icon color set to #20352E with an F8F6F2 background circle frame
+              className="inline-flex items-center justify-center p-2.5 rounded-xl bg-[#F8F6F2] text-[#20352E] hover:text-[#3D7A5E] focus:outline-none transition-colors"
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {isOpen ? (
@@ -60,12 +62,12 @@ export default function Header() {
 
       {/* Mobile Sidebar Panel */}
       {isOpen && (
-        <div className="md:hidden bg-[#1C243A] border-t border-white/5 px-4 pt-2 pb-6 space-y-2 shadow-inner">
-          <Link href="/" className="block px-3 py-2.5 rounded-xl text-zinc-200 hover:bg-white/5 hover:text-[#E5AA27] font-medium">Marketplace</Link>
-          <Link href="#" className="block px-3 py-2.5 rounded-xl text-zinc-200 hover:bg-white/5 hover:text-[#E5AA27] font-medium">How It Works</Link>
-          <Link href="#" className="block px-3 py-2.5 rounded-xl text-zinc-200 hover:bg-white/5 hover:text-[#E5AA27] font-medium">About Us</Link>
+        <div className="md:hidden bg-white border-t border-[#E5EFEB] px-4 pt-2 pb-6 space-y-1.5 shadow-xs">
+          <Link href="/" className="block px-3 py-2.5 rounded-xl bg-[#F8F6F2] text-[#20352E] font-bold">Marketplace</Link>
+          <Link href="#" className="block px-3 py-2.5 rounded-xl text-[#3F564C] hover:text-[#20352E] font-semibold">How It Works</Link>
+          <Link href="#" className="block px-3 py-2.5 rounded-xl text-[#3F564C] hover:text-[#20352E] font-semibold">About Us</Link>
           <div className="pt-4">
-            <Link href="#" className="block text-center bg-[#E5AA27] text-[#1C243A] px-4 py-3 rounded-xl font-black shadow-md">
+            <Link href="#" className="block text-center bg-[#3D7A5E] text-white px-4 py-3 rounded-xl font-black shadow-xs hover:bg-[#285F44]">
               Enlist Livestock
             </Link>
           </div>

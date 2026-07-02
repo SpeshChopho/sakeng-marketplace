@@ -1,6 +1,6 @@
 import LivestockCard from "./components/LivestockCard";
 
-// Mock data structured exactly like your new Supabase schema
+// Mock data configuration structure
 const sampleListing = {
   id: "test-uuid-123",
   serial_id: "SKG-001",
@@ -22,17 +22,16 @@ const sampleListing = {
 export default function Home() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Welcome Header */}
+      {/* Title block synchronized using your custom #20352E values */}
       <div className="mb-10 text-center md:text-left">
-        <h1 className="text-3xl md:text-4xl font-black text-[#1C243A] tracking-tight">
+        <h1 className="text-3xl md:text-4xl font-black text-[#20352E] tracking-tight">
           Premium Livestock Feed
         </h1>
-        <p className="text-zinc-500 text-sm mt-1.5 font-medium">
+        <p className="text-[#3F564C] text-sm mt-1.5 font-medium">
           Browse verified listings across the region. Seamless trading, optimized for accuracy.
         </p>
       </div>
 
-      {/* Main Grid Feed */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center md:justify-items-start">
         <LivestockCard listing={sampleListing} />
       </div>
