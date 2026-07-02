@@ -15,7 +15,8 @@ export default function Header() {
           {/* Logo Brand Frame */}
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center space-x-3 group">
-              <div className="relative w-14 h-14 transition-transform group-hover:scale-105">
+              {/* Logo increased by 25% to a crisp 70px frame */}
+              <div className="relative w-[70px] h-[70px] transition-transform group-hover:scale-105">
                 <Image 
                   src="/logo.png"
                   alt="Sakeng Livestock Logo"
@@ -45,8 +46,8 @@ export default function Header() {
           <div className="md:hidden">
             <button 
               onClick={() => setIsOpen(!isOpen)} 
-              // Burger icon color set to #20352E with an F8F6F2 background circle frame
-              className="inline-flex items-center justify-center p-2.5 rounded-xl bg-[#F8F6F2] text-[#20352E] hover:text-[#3D7A5E] focus:outline-none transition-colors"
+              // Padding reduced by 10% to p-2 for a sharper button layout footprint
+              className="inline-flex items-center justify-center p-2 rounded-xl bg-[#F8F6F2] text-[#20352E] hover:text-[#3D7A5E] focus:outline-none transition-colors"
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {isOpen ? (
