@@ -13,7 +13,7 @@ const sampleListing = {
   inventory_count: 5,
   image_urls: [
     "https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80"
+    "https://images.unsplash.com/photo-1587572236140-5e04eb7c6530?auto=format&fit=crop&w=800&q=80"
   ],
   is_verified: true,
   status: "AVAILABLE"
@@ -48,10 +48,11 @@ export default function Home() {
 
           {/* Right Column: Visual Balance Element */}
           <div className="lg:col-span-5 order-1 lg:order-2">
-            <div className="relative w-full h-64 sm:h-80 lg:h-[400px] rounded-[2rem] overflow-hidden border-4 border-white shadow-md transform lg:rotate-1 hover:rotate-0 transition-transform duration-300">
+            {/* Height optimized down by 15% to h-[340px] for tighter symmetry */}
+            <div className="relative w-full h-64 sm:h-80 lg:h-[340px] rounded-[2rem] overflow-hidden border-4 border-white shadow-md transform lg:rotate-1 hover:rotate-0 transition-transform duration-300">
               <img 
-                src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=1000&q=80" 
-                alt="Premium Livestock Marketplace"
+                src="https://images.unsplash.com/photo-1484557985045-edf25e08da73?auto=format&fit=crop&w=1000&q=80" 
+                alt="Premium Quality Livestock Sheep Lesotho"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#20352E]/30 to-transparent"></div>
@@ -71,7 +72,7 @@ export default function Home() {
       <section className="bg-white border-y border-[#E5E7EB] py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <span className="text-[11px] font-black tracking-widest text-[#6D8077] uppercase block text-center md:text-left mb-3">
-            Browse Livestock by Category
+            Browse by Category
           </span>
           <div className="flex flex-wrap justify-center md:justify-start gap-3">
             {['Cattle', 'Sheep', 'Goats', 'Pigs', 'Poultry'].map((cat) => (
