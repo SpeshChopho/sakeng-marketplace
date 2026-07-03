@@ -1,36 +1,45 @@
+import { supabase } from "./utils/supabase";
 import LivestockCard from "./components/LivestockCard";
 
-// Mock data array configured for the livestock cards grid (Max 4 items on mobile)
-const sampleListings = [
-  {
-    id: "test-uuid-1",
-    serial_id: "SKG-001",
-    category: "Cattle",
-    title: "Bonsmara Bull",
-    breed: "Bonsmara",
-    age_text: "18 Months",
-    listing_price: 14500.00,
-    location: "Maseru",
-    inventory_count: 5,
-    image_urls: [
-      "https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1587572236140-5e04eb7c6530?auto=format&fit=crop&w=800&q=80"
-    ],
-    is_verified: true,
-    status: "AVAILABLE"
+// Tells Next.js to bypass the cache and fetch live from Supabase on every visit
+export const dynamic = "force-dynamic";
+
+const categoryMeta: { [key: string]: string } = {
+  Cattle: "🐄",
+  Sheep: "🐑",
+  Goats: "🐐",
+  Pigs: "🐖",
+  Poultry: "🐓"
+};
+
+export default async function Home() {
+  // Fetch live listings from the Supabase table
+  const { data: dbListings, error } = await supabase
+    .from("listing")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching listings from Supabase:", error.message);
   }
-];
 
-// Content Schema categories with explicit item counts
-const categories = [
-  { name: "Cattle", count: 12, emoji: "🐄" },
-  { name: "Sheep", count: 7, emoji: "🐑" },
-  { name: "Goats", count: 2, emoji: "🐐" },
-  { name: "Pigs", count: 3, emoji: "🐖" },
-  { name: "Poultry", count: 100, emoji: "🐓" }
-];
+  const listings = dbListings || [];
 
-export default function Home() {
+  // Dynamically count real-time inventory listings for each category
+  const categories = ["Cattle", "Sheep", "Goats", "Pigs", "Poultry"].map((catName) => {
+    const matchingListings = listings.filter(
+      (item) => item.category?.toLowerCase() === catName.toLowerCase()
+    );
+    
+    const totalCount = matchingListings.reduce((sum, item) => sum + (item.inventory_count || 0), 0);
+
+    return {
+      name: catName,
+      count: totalCount,
+      emoji: categoryMeta[catName] || "🚜"
+    };
+  });
+
   return (
     <div className="bg-[#F8F6F2] w-full overflow-x-hidden relative">
       
@@ -38,7 +47,6 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-20 pb-16 md:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          {/* Left Column Text Content */}
           <div className="lg:col-span-7 text-center md:text-left order-2 lg:order-1">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#20352E] tracking-tight leading-tight">
               Lesotho’s Trusted <br />
@@ -48,7 +56,6 @@ export default function Home() {
               Buy and sell livestock through verified listings, supervised viewings, and direct WhatsApp support.
             </p>
             
-            {/* Dual Hero Call-To-Action Framework */}
             <div className="mt-8 flex flex-col sm:flex-row justify-center md:justify-start gap-4">
               <a 
                 href="#listings" 
@@ -67,7 +74,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right Column Frame */}
           <div className="lg:col-span-5 order-1 lg:order-2">
             <div className="relative w-full h-64 sm:h-80 lg:h-[340px] rounded-[2rem] overflow-hidden border-4 border-white shadow-md transform lg:rotate-1 hover:rotate-0 transition-transform duration-300">
               <img 
@@ -124,14 +130,18 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Dynamic Grid Layout showing max 4 on small views */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center md:justify-items-start">
-          {sampleListings.slice(0, 4).map((listing) => (
-            <LivestockCard key={listing.id} listing={listing} />
-          ))}
-        </div>
+        {listings.length === 0 ? (
+          <div className="text-center py-12 bg-white rounded-2xl border border-[#E5E7EB] w-full">
+            <p className="text-sm font-bold text-[#6D8077]">No livestock listings available right now. Check back soon!</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center md:justify-items-start">
+            {listings.slice(0, 4).map((listing) => (
+              <LivestockCard key={listing.id} listing={listing} />
+            ))}
+          </div>
+        )}
 
-        {/* Updated Button Style to match Sell Your Livestock Border & Text Design */}
         <div className="mt-12 text-center">
           <button className="inline-flex items-center space-x-2 bg-white text-[#20352E] border-2 border-[#20352E] font-black text-sm px-8 py-4 rounded-xl hover:bg-zinc-50 transition-all shadow-2xs transform active:scale-95">
             <span>View All Livestock</span>
@@ -181,41 +191,24 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Step 1 */}
           <div className="bg-white border border-[#E5E7EB] p-8 rounded-2xl">
-            <div className="w-10 h-10 rounded-xl bg-[#3D7A5E]/10 text-[#3D7A5E] flex items-center justify-center font-black text-sm mb-4">
-              1
-            </div>
+            <div className="w-10 h-10 rounded-xl bg-[#3D7A5E]/10 text-[#3D7A5E] flex items-center justify-center font-black text-sm mb-4">1</div>
             <h3 className="text-lg font-bold text-[#20352E]">Browse</h3>
-            <p className="text-xs text-[#3F564C] mt-2 font-medium leading-relaxed">
-              View available livestock across Lesotho.
-            </p>
+            <p className="text-xs text-[#3F564C] mt-2 font-medium leading-relaxed">View available livestock across Lesotho.</p>
           </div>
 
-          {/* Step 2 */}
           <div className="bg-white border border-[#E5E7EB] p-8 rounded-2xl">
-            <div className="w-10 h-10 rounded-xl bg-[#3D7A5E]/10 text-[#3D7A5E] flex items-center justify-center font-black text-sm mb-4">
-              2
-            </div>
+            <div className="w-10 h-10 rounded-xl bg-[#3D7A5E]/10 text-[#3D7A5E] flex items-center justify-center font-black text-sm mb-4">2</div>
             <h3 className="text-lg font-bold text-[#20352E]">Contact Us</h3>
-            <p className="text-xs text-[#3F564C] mt-2 font-medium leading-relaxed">
-              Message us on WhatsApp. We’ll answer your questions and connect you with the seller.
-            </p>
+            <p className="text-xs text-[#3F564C] mt-2 font-medium leading-relaxed">Message us on WhatsApp. We’ll answer your questions and connect you with the seller.</p>
           </div>
 
-          {/* Step 3 */}
           <div className="bg-white border border-[#E5E7EB] p-8 rounded-2xl">
-            <div className="w-10 h-10 rounded-xl bg-[#3D7A5E]/10 text-[#3D7A5E] flex items-center justify-center font-black text-sm mb-4">
-              3
-            </div>
+            <div className="w-10 h-10 rounded-xl bg-[#3D7A5E]/10 text-[#3D7A5E] flex items-center justify-center font-black text-sm mb-4">3</div>
             <h3 className="text-lg font-bold text-[#20352E]">Meet & Buy</h3>
-            <p className="text-xs text-[#3F564C] mt-2 font-medium leading-relaxed mb-4">
-              For eligible livestock, Sakeng helps make the buying process more secure.
-            </p>
+            <p className="text-xs text-[#3F564C] mt-2 font-medium leading-relaxed mb-4">For eligible livestock, Sakeng helps make the buying process more secure.</p>
             <div className="border-t border-[#E5E7EB] pt-4 space-y-2 text-[11px] text-[#3F564C] font-medium">
-              <p className="text-[#6D8077] italic font-semibold mb-2">
-                *Applies to selected livestock only. Eligible listings are marked with the Sakeng Verified badge.
-              </p>
+              <p className="text-[#6D8077] italic font-semibold mb-2">*Applies to selected livestock only. Eligible listings are marked with the Sakeng Verified badge.</p>
               <div className="flex items-start space-x-2">
                 <span className="text-[#3D7A5E] font-black">•</span>
                 <p>Book a supervised viewing with the Sakeng team.</p>
