@@ -131,8 +131,9 @@ export default function Home() {
           ))}
         </div>
 
+        {/* Updated Button Style to match Sell Your Livestock Border & Text Design */}
         <div className="mt-12 text-center">
-          <button className="inline-flex items-center space-x-2 bg-white border border-[#E5E7EB] text-[#20352E] font-bold text-sm px-6 py-3 rounded-xl hover:bg-zinc-50 transition-colors shadow-2xs">
+          <button className="inline-flex items-center space-x-2 bg-white text-[#20352E] border-2 border-[#20352E] font-black text-sm px-8 py-4 rounded-xl hover:bg-zinc-50 transition-all shadow-2xs transform active:scale-95">
             <span>View All Livestock</span>
             <span>➔</span>
           </button>
