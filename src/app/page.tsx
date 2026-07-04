@@ -30,7 +30,7 @@ export default async function Home() {
         {/* Full-Bleed Background Image (Exact Portrait Image from image_8.png) */}
         <div className="absolute inset-0 w-full h-full z-0">
           <img
-            src={"https://images.unsplash.com/photo-1554755209-85e44182e019?q=80&w=774&auto=format&fit=crop"} 
+            src={"https://images.unsplash.com/photo-1484557985045-edf25e08da73?q=80&w=773&auto=format&fit=crop"} 
             alt="Lesotho Highland Sheep Portrait"
             className="w-full h-full object-cover object-center md:object-[right_25%]"
           />
