@@ -55,7 +55,8 @@ export default async function Home() {
               <span className="text-[#3D7A5E]">Livestock Marketplace</span>
             </h1>
 
-            <p className="text-sm md:text-base font-medium text-[#20352E]/90 leading-relaxed max-w-md">
+            {/* UPDATED: Changed text-sm md:text-base to text-base md:text-lg & forced font-medium */}
+            <p className="text-base md:text-lg font-medium text-[#20352E]/90 leading-relaxed max-w-md">
               Buy and sell livestock through verified listings, supervised viewings, and direct WhatsApp support.
             </p>
 
@@ -90,7 +91,8 @@ export default async function Home() {
               </div>
               <div className="flex flex-col space-y-1">
                 <h4 className="text-sm font-bold text-[#20352E]">Trusted Marketplace</h4>
-                <p className="text-xs font-medium text-[#6D8077] leading-relaxed">
+                {/* UPDATED: text-xs to text-sm, font-medium stays */}
+                <p className="text-sm font-medium text-[#6D8077] leading-relaxed">
                   A simple and transparent way to buy and sell livestock.
                 </p>
               </div>
@@ -104,7 +106,8 @@ export default async function Home() {
               </div>
               <div className="flex flex-col space-y-1">
                 <h4 className="text-sm font-bold text-[#20352E]">Verified Livestock</h4>
-                <p className="text-xs font-medium text-[#6D8077] leading-relaxed">
+                {/* UPDATED: text-xs to text-sm, font-medium stays */}
+                <p className="text-sm font-medium text-[#6D8077] leading-relaxed">
                   Selected livestock is checked before being listed.
                 </p>
               </div>
@@ -118,7 +121,8 @@ export default async function Home() {
               </div>
               <div className="flex flex-col space-y-1">
                 <h4 className="text-sm font-bold text-[#20352E]">Supervised Viewings</h4>
-                <p className="text-xs font-medium text-[#6D8077] leading-relaxed">
+                {/* UPDATED: text-xs to text-sm, font-medium stays */}
+                <p className="text-sm font-medium text-[#6D8077] leading-relaxed">
                   We help arrange and supervise viewings for added peace of mind.
                 </p>
               </div>
@@ -133,7 +137,8 @@ export default async function Home() {
               </div>
               <div className="flex flex-col space-y-1">
                 <h4 className="text-sm font-bold text-[#20352E]">WhatsApp Support</h4>
-                <p className="text-xs font-medium text-[#6D8077] leading-relaxed">
+                {/* UPDATED: text-xs to text-sm, font-medium stays */}
+                <p className="text-sm font-medium text-[#6D8077] leading-relaxed">
                   Our team is available to answer your questions and guide you through the process.
                 </p>
               </div>
@@ -149,7 +154,8 @@ export default async function Home() {
           <h2 className="text-xl md:text-2xl font-black text-[#20352E] tracking-tight">
             Latest Livestock
           </h2>
-          <p className="text-xs font-medium text-[#6D8077] mt-1">
+          {/* UPDATED: text-xs to text-sm, font-medium stays */}
+          <p className="text-sm font-medium text-[#6D8077] mt-1">
             Browse some of the latest verified livestock currently available across Lesotho.
           </p>
         </div>
@@ -177,13 +183,13 @@ export default async function Home() {
       </section>
 
       {/* ================= 4. BROWSE BY CATEGORY ================= */}
-      {/* TIGHTENED GAP: Changed padding from py-8 to pt-8 pb-3 */}
       <section className="max-w-7xl mx-auto px-6 pt-8 pb-3 border-t border-[#E5E7EB]">
         <div className="mb-6 text-left">
           <h2 className="text-xl md:text-2xl font-black text-[#20352E] tracking-tight">
             Browse by Category
           </h2>
-          <p className="text-xs font-medium text-[#6D8077] mt-1">
+          {/* UPDATED: text-xs to text-sm, font-medium stays */}
+          <p className="text-sm font-medium text-[#6D8077] mt-1">
             Choose a category to explore available livestock across Lesotho.
           </p>
         </div>
@@ -200,6 +206,7 @@ export default async function Home() {
                 <h4 className="text-sm font-bold text-[#20352E]">
                   {cat.name}
                 </h4>
+                {/* UNTOUCHED: Metadata tag labels are kept small */}
                 <p className="text-[10px] font-bold text-[#3D7A5E] mt-0.5 bg-[#F4F6F5] px-1.5 py-0.5 rounded-md inline-block">
                   {cat.count} listings
                 </p>
@@ -210,14 +217,14 @@ export default async function Home() {
       </section>
 
       {/* ================= 5. REQUEST LIVESTOCK ================= */}
-      {/* TIGHTENED GAP & NEW COPY: Changed pt-4 to pt-1, updated headings */}
       <section className="max-w-7xl mx-auto px-6 pb-12 pt-1">
         <div className="bg-gradient-to-br from-white to-[#F4F6F5] border border-[#E5E7EB] rounded-2xl p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-1.5 max-w-2xl text-left">
             <h3 className="text-lg font-black text-[#20352E] tracking-tight">
               Looking for a specific animal?
             </h3>
-            <p className="text-xs font-medium text-[#6D8077] leading-relaxed">
+            {/* UPDATED: text-xs to text-sm, font-medium stays */}
+            <p className="text-sm font-medium text-[#6D8077] leading-relaxed">
               Tell us what you need and we’ll help source it through our trusted network.
             </p>
           </div>
@@ -240,7 +247,8 @@ export default async function Home() {
           <h2 className="text-xl md:text-2xl font-black text-[#20352E] tracking-tight">
             How Sakeng Works?
           </h2>
-          <p className="text-xs font-medium text-[#6D8077] mt-1">
+          {/* UPDATED: text-xs to text-sm, font-medium stays */}
+          <p className="text-sm font-medium text-[#6D8077] mt-1">
             Buying or selling livestock is simple with Sakeng.
           </p>
         </div>
@@ -249,29 +257,34 @@ export default async function Home() {
           
           <div className="flex flex-col items-start text-left p-5 bg-white border border-[#E5E7EB] rounded-2xl">
             <h4 className="text-sm font-bold text-[#3D7A5E] uppercase tracking-wide">Browse</h4>
-            <p className="text-xs font-medium text-[#6D8077] mt-2 leading-relaxed">
+            {/* UPDATED: text-xs to text-sm, font-medium stays */}
+            <p className="text-sm font-medium text-[#6D8077] mt-2 leading-relaxed">
               View available livestock across Lesotho.
             </p>
           </div>
 
           <div className="flex flex-col items-start text-left p-5 bg-white border border-[#E5E7EB] rounded-2xl">
             <h4 className="text-sm font-bold text-[#3D7A5E] uppercase tracking-wide">Contact Us</h4>
-            <p className="text-xs font-medium text-[#6D8077] mt-2 leading-relaxed">
+            {/* UPDATED: text-xs to text-sm, font-medium stays */}
+            <p className="text-sm font-medium text-[#6D8077] mt-2 leading-relaxed">
               Message us on WhatsApp. We’ll answer your questions and connect you with the seller.
             </p>
           </div>
 
           <div className="flex flex-col items-start text-left p-5 bg-white border border-[#E5E7EB] rounded-2xl">
             <h4 className="text-sm font-bold text-[#3D7A5E] uppercase tracking-wide">Meet & Buy</h4>
-            <p className="text-xs font-medium text-[#6D8077] mt-2 leading-relaxed">
+            {/* UPDATED: text-xs to text-sm, font-medium stays */}
+            <p className="text-sm font-medium text-[#6D8077] mt-2 leading-relaxed">
               For eligible livestock, Sakeng helps make the buying process more secure.
             </p>
             
+            {/* UNTOUCHED: Footnote label/disclaimer criteria */}
             <p className="text-[10px] font-bold text-[#6D8077] mt-3 italic">
               Applies to selected livestock only. Eligible listings are marked with the Sakeng Verified badge.
             </p>
 
-            <ul className="mt-4 space-y-2 text-xs font-medium text-[#20352E]/90 list-disc pl-4">
+            {/* UPDATED: text-xs to text-sm, font-medium stays */}
+            <ul className="mt-4 space-y-2 text-sm font-medium text-[#20352E]/90 list-disc pl-4">
               <li>Book a supervised viewing with the Sakeng team.</li>
               <li>Pay a refundable 5% commitment fee to reserve your viewing.</li>
               <li>Buy with confidence - If you purchase the livestock, your commitment fee is deducted from the purchase price.</li>
@@ -286,7 +299,8 @@ export default async function Home() {
       <section className="bg-[#F4F6F5] border-t border-[#E5E7EB] py-12 px-6 text-left">
         <div className="max-w-7xl mx-auto space-y-3">
           <h2 className="text-lg font-black text-[#20352E] tracking-tight uppercase">Our Mission</h2>
-          <p className="text-sm font-medium text-[#20352E] leading-relaxed max-w-3xl">
+          {/* UPDATED: text-sm to text-base, font-medium stays */}
+          <p className="text-base font-medium text-[#20352E] leading-relaxed max-w-3xl">
             We’re building a safer and more transparent way to buy and sell livestock in Lesotho through verified listings, supervised viewings, and direct support.
           </p>
         </div>
