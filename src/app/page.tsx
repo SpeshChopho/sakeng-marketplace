@@ -30,9 +30,8 @@ export default async function Home() {
     { name: 'Poultry', count: 100, icon: '🐓' },
   ];
 
-  // WhatsApp text for sourcing request
   const whatsappSourcingMessage = encodeURIComponent(
-    "Hello Sakeng team, I am looking for specific livestock and would like assistance sourcing it through your network."
+    "Hello Sakeng team, I am looking for a specific animal and would like assistance sourcing it through your network."
   );
 
   return (
@@ -167,7 +166,6 @@ export default async function Home() {
               ))}
             </div>
             
-            {/* Update 1: Center button on mobile, align left on desktop */}
             <div className="mt-8 flex justify-center md:justify-start">
               <Link href="/browse" className="text-xs font-bold text-[#3D7A5E] hover:text-[#285F44] border border-[#3D7A5E]/20 hover:border-[#285F44] bg-white px-5 py-2.5 rounded-xl flex items-center space-x-1.5 transition-all shadow-2xs active:scale-[0.98]">
                 <span>View All Livestock</span>
@@ -179,7 +177,8 @@ export default async function Home() {
       </section>
 
       {/* ================= 4. BROWSE BY CATEGORY ================= */}
-      <section className="max-w-7xl mx-auto px-6 py-8 border-t border-[#E5E7EB]">
+      {/* TIGHTENED GAP: Changed padding from py-8 to pt-8 pb-3 */}
+      <section className="max-w-7xl mx-auto px-6 pt-8 pb-3 border-t border-[#E5E7EB]">
         <div className="mb-6 text-left">
           <h2 className="text-xl md:text-2xl font-black text-[#20352E] tracking-tight">
             Browse by Category
@@ -191,7 +190,6 @@ export default async function Home() {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
           {categories.map((cat) => (
-            /* Update 2a, 2b, 2c: Reduced height, increased icon scale, full block wrapper link */
             <Link 
               key={cat.name} 
               href={`/browse?category=${cat.name}`}
@@ -211,21 +209,21 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ================= 5. REQUEST LIVESTOCK (NEW SECTION) ================= */}
-      {/* Update 3: Sourcing Callout Section directly under categories */}
-      <section className="max-w-7xl mx-auto px-6 pb-12 pt-4">
+      {/* ================= 5. REQUEST LIVESTOCK ================= */}
+      {/* TIGHTENED GAP & NEW COPY: Changed pt-4 to pt-1, updated headings */}
+      <section className="max-w-7xl mx-auto px-6 pb-12 pt-1">
         <div className="bg-gradient-to-br from-white to-[#F4F6F5] border border-[#E5E7EB] rounded-2xl p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-1.5 max-w-2xl text-left">
             <h3 className="text-lg font-black text-[#20352E] tracking-tight">
-              Looking for something specific?
+              Looking for a specific animal?
             </h3>
             <p className="text-xs font-medium text-[#6D8077] leading-relaxed">
-              Tell us the livestock you’re looking for and we’ll help source it through our network across Lesotho.
+              Tell us what you need and we’ll help source it through our trusted network.
             </p>
           </div>
           <div className="shrink-0 flex">
             <a 
-              href={`https://wa.me/26658566600?text=${whatsappSourcingMessage}`}
+              href={`https://wa.me/266XXXXXXXX?text=${whatsappSourcingMessage}`}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#20352E] hover:bg-[#3D7A5E] text-white font-bold text-xs px-5 py-3 rounded-xl transition-all shadow-xs text-center active:scale-[0.98] w-full md:w-auto"
