@@ -69,13 +69,12 @@ export default async function Home() {
       {/* ================= 2. WHY CHOOSE SAKENG ================= */}
       <section className="bg-white border-y border-[#E5E7EB] py-10 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-8 text-center md:text-left">
+          <div className="mb-8 text-left">
             <h2 className="text-xl md:text-2xl font-black text-[#20352E] tracking-tight">
               Why Choose Sakeng
             </h2>
           </div>
 
-          {/* Grid layout with clean border lines serving both mobile stacks and desktop grids seamlessly */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             
             {/* Trusted Marketplace */}
@@ -126,7 +125,6 @@ export default async function Home() {
             {/* WhatsApp Support */}
             <div className="flex items-start space-x-3.5 pt-6 sm:pt-6 lg:pt-0 lg:px-4 lg:last:pr-0 h-full">
               <div className="text-[#3D7A5E] shrink-0 pt-0.5">
-                {/* Fixed crisp geometric minimalist WhatsApp icon matching image.png */}
                 <svg className="w-6 h-6 stroke-current" fill="none" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 10-9-9c0 1.48.36 2.88 1 4.1L3 21l4.9-1c1.2.64 2.58 1 4.1 1z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9.5 9.2c.2-.5.5-.5.8-.5s.4 0 .6.3c.2.2.6 1.4.6 1.6s0 .3-.1.4c-.1.2-.2.3-.3.4-.1.1-.2.3 0 .6.2.4.5.6.8.9.4.3.8.5 1.1.7.3.1.4.1.6-.1.2-.2.8-.9 1-.1.2.3.4.2.6.2s1.5.8 1.6.9c.1.1.1.2.1.3-.1.4-.4.8-.7.9-.3.2-.7.2-1.5-.1-1.1-.4-1.8-1.5-1.9-1.6 0-.1-.6-.8-.6-1.5 0-.7.3-1 .5-1.2z" />
@@ -146,7 +144,7 @@ export default async function Home() {
 
       {/* ================= 3. LATEST LIVESTOCK ================= */}
       <section className="max-w-7xl mx-auto px-6 py-12">
-        <div className="mb-6">
+        <div className="mb-6 text-left">
           <h2 className="text-xl md:text-2xl font-black text-[#20352E] tracking-tight">
             Latest Livestock
           </h2>
@@ -156,18 +154,18 @@ export default async function Home() {
         </div>
 
         {listings.length === 0 ? (
-          <div className="bg-white border border-[#E5E7EB] rounded-2xl p-12 text-center">
+          <div className="bg-white border border-[#E5E7EB] rounded-2xl p-12 text-left">
             <p className="text-sm font-medium text-[#6D8077]">No live listings available right now. Check back soon!</p>
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-start">
               {listings.map((listing: any) => (
                 <LivestockCard key={listing.id} listing={listing} />
               ))}
             </div>
             
-            <div className="mt-8 flex justify-center">
+            <div className="mt-8 flex justify-start">
               <button className="text-xs font-bold text-[#3D7A5E] hover:text-[#285F44] border border-[#3D7A5E]/20 hover:border-[#285F44] bg-white px-5 py-2.5 rounded-xl flex items-center space-x-1.5 transition-all shadow-2xs active:scale-[0.98]">
                 <span>View All Livestock</span>
                 <span>→</span>
@@ -179,7 +177,7 @@ export default async function Home() {
 
       {/* ================= 4. BROWSE BY CATEGORY ================= */}
       <section className="max-w-7xl mx-auto px-6 py-8 border-t border-[#E5E7EB]">
-        <div className="mb-6">
+        <div className="mb-6 text-left">
           <h2 className="text-xl md:text-2xl font-black text-[#20352E] tracking-tight">
             Browse by Category
           </h2>
@@ -208,7 +206,7 @@ export default async function Home() {
 
       {/* ================= 5. HOW SAKENG WORKS? ================= */}
       <section className="max-w-7xl mx-auto px-6 py-14 border-t border-[#E5E7EB]">
-        <div className="text-center max-w-xl mx-auto mb-10">
+        <div className="text-left max-w-xl mb-10">
           <h2 className="text-xl md:text-2xl font-black text-[#20352E] tracking-tight">
             How Sakeng works?
           </h2>
@@ -219,22 +217,22 @@ export default async function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
           
-          <div className="flex flex-col items-center text-center p-4 bg-white border border-[#E5E7EB] rounded-2xl">
+          <div className="flex flex-col items-start text-left p-5 bg-white border border-[#E5E7EB] rounded-2xl">
             <h4 className="text-sm font-bold text-[#3D7A5E] uppercase tracking-wide">Browse</h4>
-            <p className="text-xs font-medium text-[#6D8077] mt-2 max-w-xs leading-relaxed">
+            <p className="text-xs font-medium text-[#6D8077] mt-2 leading-relaxed">
               View available livestock across Lesotho.
             </p>
           </div>
 
-          <div className="flex flex-col items-center text-center p-4 bg-white border border-[#E5E7EB] rounded-2xl">
+          <div className="flex flex-col items-start text-left p-5 bg-white border border-[#E5E7EB] rounded-2xl">
             <h4 className="text-sm font-bold text-[#3D7A5E] uppercase tracking-wide">Contact Us</h4>
-            <p className="text-xs font-medium text-[#6D8077] mt-2 max-w-xs leading-relaxed">
+            <p className="text-xs font-medium text-[#6D8077] mt-2 leading-relaxed">
               Message us on WhatsApp. We’ll answer your questions and connect you with the seller.
             </p>
           </div>
 
           <div className="flex flex-col items-start text-left p-5 bg-white border border-[#E5E7EB] rounded-2xl">
-            <h4 className="text-sm font-bold text-[#3D7A5E] uppercase tracking-wide self-center md:self-start">Meet & Buy</h4>
+            <h4 className="text-sm font-bold text-[#3D7A5E] uppercase tracking-wide">Meet & Buy</h4>
             <p className="text-xs font-medium text-[#6D8077] mt-2 leading-relaxed">
               For eligible livestock, Sakeng helps make the buying process more secure.
             </p>
@@ -255,10 +253,10 @@ export default async function Home() {
       </section>
 
       {/* ================= 6. OUR MISSION ================= */}
-      <section className="bg-[#F4F6F5] border-t border-[#E5E7EB] py-12 px-6 text-center">
-        <div className="max-w-2xl mx-auto space-y-3">
+      <section className="bg-[#F4F6F5] border-t border-[#E5E7EB] py-12 px-6 text-left">
+        <div className="max-w-7xl mx-auto space-y-3">
           <h2 className="text-lg font-black text-[#20352E] tracking-tight uppercase">Our Mission</h2>
-          <p className="text-sm font-medium text-[#20352E] leading-relaxed">
+          <p className="text-sm font-medium text-[#20352E] leading-relaxed max-w-3xl">
             We’re building a safer and more transparent way to buy and sell livestock in Lesotho through verified listings, supervised viewings, and direct support.
           </p>
         </div>
