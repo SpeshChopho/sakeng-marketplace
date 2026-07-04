@@ -34,7 +34,7 @@ export default async function Home() {
             alt="Lesotho Highland Sheep Portrait"
             className="w-full h-full object-cover object-center md:object-[right_25%]"
           />
-          {/* Vertical white gradient overlay to mask only the text zone at 60% opacity */}
+          {/* Vertical white gradient overlay to mask only the text zone at 40% opacity */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#FBFBFA] via-[#FBFBFA]/70 to-transparent md:bg-gradient-to-r md:from-[#FBFBFA] md:via-[#FBFBFA]/60 md:to-transparent md:w-[65%]" />
         </div>
 
