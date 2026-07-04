@@ -31,7 +31,7 @@ export default async function Home() {
   ];
 
   return (
-    <div className="w-full bg-[#FBFBFA]">
+    <div className="w-full bg-[#FBFBFA] scroll-smooth">
       
       {/* ================= 1. HERO SECTION ================= */}
       <section className="relative w-full min-h-[500px] md:min-h-[550px] flex items-center overflow-hidden bg-[#FBFBFA]">
@@ -41,7 +41,6 @@ export default async function Home() {
             alt="Lesotho Highland Sheep Portrait"
             className="w-full h-full object-cover object-center md:object-[right_25%]"
           />
-          {/* Fix 5: Reduced backdrop filter gradient cover mask by exactly 5% opacity */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#FBFBFA] via-[#FBFBFA]/65 to-transparent md:bg-gradient-to-r md:from-[#FBFBFA] md:via-[#FBFBFA]/65 md:to-transparent md:w-[65%]" />
         </div>
 
@@ -56,12 +55,12 @@ export default async function Home() {
               Buy and sell livestock through verified listings, supervised viewings, and direct WhatsApp support.
             </p>
 
-            {/* Fix 1: Active Router Anchor CTAs */}
+            {/* Fixed to point to on-page anchor sections */}
             <div className="pt-2 flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-              <Link href="/browse" className="bg-[#3D7A5E] hover:bg-[#285F44] text-white font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 shadow-xs text-center active:scale-[0.98]">
+              <Link href="#latest-livestock" className="bg-[#3D7A5E] hover:bg-[#285F44] text-white font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 shadow-xs text-center active:scale-[0.98]">
                 Browse Livestock
               </Link>
-              <Link href="/sell" className="bg-white hover:bg-zinc-50 border border-[#20352E] text-[#20352E] font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 shadow-xs text-center active:scale-[0.98]">
+              <Link href="#how-it-works" className="bg-white hover:bg-zinc-50 border border-[#20352E] text-[#20352E] font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 shadow-xs text-center active:scale-[0.98]">
                 Sell Your Livestock
               </Link>
             </div>
@@ -80,7 +79,6 @@ export default async function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             
-            {/* Trusted Marketplace */}
             <div className="flex items-start space-x-3.5 pb-6 sm:pb-8 lg:pb-0 lg:px-4 lg:first:pl-0 border-b sm:border-b-0 sm:border-r border-[#E5E7EB] lg:border-b-0 h-full">
               <div className="text-[#3D7A5E] shrink-0 pt-0.5">
                 <svg className="w-6 h-6 stroke-current" fill="none" strokeWidth="2" viewBox="0 0 24 24">
@@ -95,7 +93,6 @@ export default async function Home() {
               </div>
             </div>
 
-            {/* Verified Livestock */}
             <div className="flex items-start space-x-3.5 pt-6 pb-6 sm:pt-0 sm:pb-8 lg:pb-0 lg:pt-0 lg:px-4 border-b lg:border-b-0 lg:border-r border-[#E5E7EB] h-full">
               <div className="text-[#3D7A5E] shrink-0 pt-0.5">
                 <svg className="w-6 h-6 stroke-current" fill="none" strokeWidth="2" viewBox="0 0 24 24">
@@ -110,7 +107,6 @@ export default async function Home() {
               </div>
             </div>
 
-            {/* Supervised Viewings */}
             <div className="flex items-start space-x-3.5 pt-6 pb-6 sm:pt-6 sm:pb-0 lg:pt-0 lg:px-4 border-b sm:border-b-0 sm:border-r border-[#E5E7EB] h-full">
               <div className="text-[#3D7A5E] shrink-0 pt-0.5">
                 <svg className="w-6 h-6 fill-none stroke-current" strokeWidth="2" viewBox="0 0 24 24">
@@ -125,10 +121,8 @@ export default async function Home() {
               </div>
             </div>
 
-            {/* WhatsApp Support */}
             <div className="flex items-start space-x-3.5 pt-6 sm:pt-6 lg:pt-0 lg:px-4 lg:last:pr-0 h-full">
               <div className="text-[#3D7A5E] shrink-0 pt-0.5">
-                {/* Fix 4: Flawless symmetrical line-art WhatsApp icon */}
                 <svg className="w-6 h-6 stroke-current" fill="none" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" d="M12 21a9 9 0 0 0 4.1-.98L21 21l-1-4.9A9 9 0 1 0 12 21z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9.2 9.5c.2-.4.4-.4.7-.4.2 0 .4.1.5.3.2.3.5 1.2.5 1.3 0 .2-.1.3-.2.4-.1.1-.2.2-.3.4-.1.1-.1.2 0 .4.2.4.5.7.8.9.4.3.7.4 1 .5.2.1.3 0 .4-.1.1-.2.5-.6.7-.8.1-.1.3-.1.5 0 .2.1 1.2.6 1.3.6.1 0 .2.1.2.3-.1.4-.3.7-.6.8-.3.2-.6.2-1.3-.1-.9-.3-1.5-1.1-1.6-1.2 0 0-.5-.7-.5-1.3 0-.6.3-.9.4-1z" />
@@ -147,7 +141,8 @@ export default async function Home() {
       </section>
 
       {/* ================= 3. LATEST LIVESTOCK ================= */}
-      <section className="max-w-7xl mx-auto px-6 py-12">
+      {/* Added id="latest-livestock" anchor anchor here */}
+      <section id="latest-livestock" className="max-w-7xl mx-auto px-6 py-12 scroll-mt-20">
         <div className="mb-6 text-left">
           <h2 className="text-xl md:text-2xl font-black text-[#20352E] tracking-tight">
             Latest Livestock
@@ -170,7 +165,7 @@ export default async function Home() {
             </div>
             
             <div className="mt-8 flex justify-start">
-              <Link href="/browse" className="text-xs font-bold text-[#3D7A5E] hover:text-[#285F44] border border-[#3D7A5E]/20 hover:border-[#285F44] bg-white px-5 py-2.5 rounded-xl flex items-center space-x-1.5 transition-all shadow-2xs active:scale-[0.98]">
+              <Link href="#latest-livestock" className="text-xs font-bold text-[#3D7A5E] hover:text-[#285F44] border border-[#3D7A5E]/20 hover:border-[#285F44] bg-white px-5 py-2.5 rounded-xl flex items-center space-x-1.5 transition-all shadow-2xs active:scale-[0.98]">
                 <span>View All Livestock</span>
                 <span>→</span>
               </Link>
@@ -209,8 +204,8 @@ export default async function Home() {
       </section>
 
       {/* ================= 5. HOW SAKENG WORKS? ================= */}
-      <section className="max-w-7xl mx-auto px-6 py-14 border-t border-[#E5E7EB]">
-        {/* Fix 6: Capitalized 'Works' */}
+      {/* Added id="how-it-works" anchor here */}
+      <section id="how-it-works" className="max-w-7xl mx-auto px-6 py-14 border-t border-[#E5E7EB] scroll-mt-20">
         <div className="text-left max-w-xl mb-10">
           <h2 className="text-xl md:text-2xl font-black text-[#20352E] tracking-tight">
             How Sakeng Works?
