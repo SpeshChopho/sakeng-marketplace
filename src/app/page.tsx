@@ -30,6 +30,11 @@ export default async function Home() {
     { name: 'Poultry', count: 100, icon: '🐓' },
   ];
 
+  // WhatsApp text for sourcing request
+  const whatsappSourcingMessage = encodeURIComponent(
+    "Hello Sakeng team, I am looking for specific livestock and would like assistance sourcing it through your network."
+  );
+
   return (
     <div className="w-full bg-[#FBFBFA] scroll-smooth">
       
@@ -55,7 +60,6 @@ export default async function Home() {
               Buy and sell livestock through verified listings, supervised viewings, and direct WhatsApp support.
             </p>
 
-            {/* Fixed to point to on-page anchor sections */}
             <div className="pt-2 flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <Link href="#latest-livestock" className="bg-[#3D7A5E] hover:bg-[#285F44] text-white font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 shadow-xs text-center active:scale-[0.98]">
                 Browse Livestock
@@ -141,7 +145,6 @@ export default async function Home() {
       </section>
 
       {/* ================= 3. LATEST LIVESTOCK ================= */}
-      {/* Added id="latest-livestock" anchor anchor here */}
       <section id="latest-livestock" className="max-w-7xl mx-auto px-6 py-12 scroll-mt-20">
         <div className="mb-6 text-left">
           <h2 className="text-xl md:text-2xl font-black text-[#20352E] tracking-tight">
@@ -164,8 +167,9 @@ export default async function Home() {
               ))}
             </div>
             
-            <div className="mt-8 flex justify-start">
-              <Link href="#latest-livestock" className="text-xs font-bold text-[#3D7A5E] hover:text-[#285F44] border border-[#3D7A5E]/20 hover:border-[#285F44] bg-white px-5 py-2.5 rounded-xl flex items-center space-x-1.5 transition-all shadow-2xs active:scale-[0.98]">
+            {/* Update 1: Center button on mobile, align left on desktop */}
+            <div className="mt-8 flex justify-center md:justify-start">
+              <Link href="/browse" className="text-xs font-bold text-[#3D7A5E] hover:text-[#285F44] border border-[#3D7A5E]/20 hover:border-[#285F44] bg-white px-5 py-2.5 rounded-xl flex items-center space-x-1.5 transition-all shadow-2xs active:scale-[0.98]">
                 <span>View All Livestock</span>
                 <span>→</span>
               </Link>
@@ -187,24 +191,52 @@ export default async function Home() {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
           {categories.map((cat) => (
-            <div 
+            /* Update 2a, 2b, 2c: Reduced height, increased icon scale, full block wrapper link */
+            <Link 
               key={cat.name} 
-              className="bg-white border border-[#E5E7EB] rounded-2xl p-4 flex flex-col items-start cursor-pointer hover:shadow-xs hover:border-[#3D7A5E] transition-all group"
+              href={`/browse?category=${cat.name}`}
+              className="bg-white border border-[#E5E7EB] rounded-2xl py-3 px-4 flex flex-col items-start cursor-pointer hover:shadow-xs hover:border-[#3D7A5E] transition-all group min-h-[105px] justify-between"
             >
-              <span className="text-2xl mb-2 group-hover:scale-110 transition-transform">{cat.icon}</span>
-              <h4 className="text-sm font-bold text-[#20352E]">
-                {cat.name}
-              </h4>
-              <p className="text-[11px] font-semibold text-[#3D7A5E] mt-0.5 bg-[#F4F6F5] px-2 py-0.5 rounded-md">
-                {cat.count} listings
-              </p>
-            </div>
+              <span className="text-3xl mb-1 group-hover:scale-110 transition-transform">{cat.icon}</span>
+              <div>
+                <h4 className="text-sm font-bold text-[#20352E]">
+                  {cat.name}
+                </h4>
+                <p className="text-[10px] font-bold text-[#3D7A5E] mt-0.5 bg-[#F4F6F5] px-1.5 py-0.5 rounded-md inline-block">
+                  {cat.count} listings
+                </p>
+              </div>
+            </Link>
           ))}
         </div>
       </section>
 
-      {/* ================= 5. HOW SAKENG WORKS? ================= */}
-      {/* Added id="how-it-works" anchor here */}
+      {/* ================= 5. REQUEST LIVESTOCK (NEW SECTION) ================= */}
+      {/* Update 3: Sourcing Callout Section directly under categories */}
+      <section className="max-w-7xl mx-auto px-6 pb-12 pt-4">
+        <div className="bg-gradient-to-br from-white to-[#F4F6F5] border border-[#E5E7EB] rounded-2xl p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="space-y-1.5 max-w-2xl text-left">
+            <h3 className="text-lg font-black text-[#20352E] tracking-tight">
+              Looking for something specific?
+            </h3>
+            <p className="text-xs font-medium text-[#6D8077] leading-relaxed">
+              Tell us the livestock you’re looking for and we’ll help source it through our network across Lesotho.
+            </p>
+          </div>
+          <div className="shrink-0 flex">
+            <a 
+              href={`https://wa.me/26658566600?text=${whatsappSourcingMessage}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#20352E] hover:bg-[#3D7A5E] text-white font-bold text-xs px-5 py-3 rounded-xl transition-all shadow-xs text-center active:scale-[0.98] w-full md:w-auto"
+            >
+              Request Livestock
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= 6. HOW SAKENG WORKS? ================= */}
       <section id="how-it-works" className="max-w-7xl mx-auto px-6 py-14 border-t border-[#E5E7EB] scroll-mt-20">
         <div className="text-left max-w-xl mb-10">
           <h2 className="text-xl md:text-2xl font-black text-[#20352E] tracking-tight">
@@ -252,7 +284,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ================= 6. OUR MISSION ================= */}
+      {/* ================= 7. OUR MISSION ================= */}
       <section className="bg-[#F4F6F5] border-t border-[#E5E7EB] py-12 px-6 text-left">
         <div className="max-w-7xl mx-auto space-y-3">
           <h2 className="text-lg font-black text-[#20352E] tracking-tight uppercase">Our Mission</h2>
