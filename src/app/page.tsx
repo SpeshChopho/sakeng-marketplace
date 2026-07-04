@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase'; // Adjust this import path to match your project setup
+import { supabase } from './utils/supabase'; // Adjust this import path to match your project setup
 import LivestockCard from './components/LivestockCard';
 
 // Force Next.js to fetch fresh database listings on every request
@@ -28,10 +28,10 @@ export default async function Home() {
       {/* ================= HERO SECTION ================= */}
       <section className="relative w-full min-h-[520px] md:min-h-[620px] flex items-center overflow-hidden bg-[#FBFBFA]">
         
-        {/* Full-Bleed Background Image Layer using your provided URL */}
+        {/* Full-Bleed Background Image Layer (Safely wrapped for Next.js compilers) */}
         <div className="absolute inset-0 w-full h-full z-0">
           <img
-            src="https://images.unsplash.com/photo-1554755209-85e44182e019?q=80&w=774&auto=format&fit=crop" 
+            src={"https://images.unsplash.com/photo-1554755209-85e44182e019?q=80&w=774&auto=format&fit=crop"} 
             alt="Lesotho Highlands Sheep"
             className="w-full h-full object-cover object-center"
           />
