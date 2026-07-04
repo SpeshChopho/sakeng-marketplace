@@ -1,4 +1,4 @@
-import { supabase } from './utils/supabase'; // Adjust this import path to match your project setup
+import { supabase } from './utils/supabase'; 
 import LivestockCard from './components/LivestockCard';
 
 // Force Next.js to fetch fresh database listings on every request
@@ -6,11 +6,11 @@ export const revalidate = 0;
 
 async function getFeaturedListings() {
   const { data, error } = await supabase
-    .from('listing') // Using 'listing' table per your frontend schema update
+    .from('listing')
     .select('*')
     .eq('status', 'AVAILABLE')
     .order('created_at', { ascending: false })
-    .limit(4); // Pulling the top 4 featured listings for the home grid
+    .limit(4);
 
   if (error) {
     console.error('Error fetching livestock listings:', error);
@@ -28,32 +28,23 @@ export default async function Home() {
       {/* ================= HERO SECTION ================= */}
       <section className="relative w-full min-h-[520px] md:min-h-[620px] flex items-center overflow-hidden bg-[#FBFBFA]">
         
-        {/* Full-Bleed Background Image Layer (Safely wrapped for Next.js compilers) */}
         <div className="absolute inset-0 w-full h-full z-0">
           <img
             src={"https://images.unsplash.com/photo-1554755209-85e44182e019?q=80&w=774&auto=format&fit=crop"} 
             alt="Lesotho Highlands Sheep"
             className="w-full h-full object-cover object-center"
           />
-          {/* 
-            Intelligent Blend Gradient Overlay:
-            - Mobile: Fades up from solid cream background to ensure text legibility at the bottom stack.
-            - Desktop: Fades from left to right to perfectly mask the text area while showcasing the sheep.
-          */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#FBFBFA] via-[#FBFBFA]/85 to-transparent md:bg-gradient-to-r md:from-[#FBFBFA] md:via-[#FBFBFA]/90 md:to-transparent" />
         </div>
 
-        {/* Content Container */}
         <div className="relative max-w-7xl mx-auto w-full px-6 py-12 md:py-20 z-10 grid grid-cols-1 md:grid-cols-2">
           <div className="flex flex-col items-start space-y-4 max-w-xl mt-auto md:mt-0">
             
-            {/* Coverage Badge */}
             <div className="bg-white border border-[#E5E7EB] px-3.5 py-1.5 rounded-xl shadow-xs flex flex-col">
               <span className="text-[9px] font-black uppercase tracking-wider text-[#6D8077] leading-none">Coverage</span>
               <span className="text-xs font-bold text-[#3D7A5E] mt-0.5">100% Nationwide Lesotho</span>
             </div>
 
-            {/* Typography */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#20352E] tracking-tight leading-[1.1]">
               Lesotho’s Trusted <br />
               <span className="text-[#3D7A5E]">Livestock Marketplace</span>
@@ -63,7 +54,6 @@ export default async function Home() {
               Buy and sell livestock through verified listings, supervised viewings, and direct WhatsApp support.
             </p>
 
-            {/* CTA Interaction Buttons */}
             <div className="pt-2 flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <button className="bg-[#3D7A5E] hover:bg-[#285F44] text-white font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 shadow-xs text-center active:scale-[0.98]">
                 Browse Livestock
@@ -125,9 +115,9 @@ export default async function Home() {
             <p className="text-sm font-medium text-[#6D8077]">No live listings available right now. Check back soon!</p>
           </div>
         ) : (
-          /* High-density grid tailored for our beautiful, tight, non-screen-filling cards */
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
-            {listings.map((listing) => (
+            {/* Explicitly typed mapping logic to clear TypeScript lint error */}
+            {listings.map((listing: any) => (
               <LivestockCard key={listing.id} listing={listing} />
             ))}
           </div>
