@@ -1,245 +1,139 @@
-import { supabase } from "./utils/supabase";
-import LivestockCard from "./components/LivestockCard";
+import { supabase } from '@/lib/supabase'; // Adjust this import path to match your project setup
+import LivestockCard from './components/LivestockCard';
 
-// Tells Next.js to bypass the cache and fetch live from Supabase on every visit
-export const dynamic = "force-dynamic";
+// Force Next.js to fetch fresh database listings on every request
+export const revalidate = 0;
 
-const categoryMeta: { [key: string]: string } = {
-  Cattle: "🐄",
-  Sheep: "🐑",
-  Goats: "🐐",
-  Pigs: "🐖",
-  Poultry: "🐓"
-};
-
-export default async function Home() {
-  // Fetch live listings from the Supabase table
-  const { data: dbListings, error } = await supabase
-    .from("listing")
-    .select("*")
-    .order("created_at", { ascending: false });
+async function getFeaturedListings() {
+  const { data, error } = await supabase
+    .from('listing') // Using 'listing' table per your frontend schema update
+    .select('*')
+    .eq('status', 'AVAILABLE')
+    .order('created_at', { ascending: false })
+    .limit(4); // Pulling the top 4 featured listings for the home grid
 
   if (error) {
-    console.error("Error fetching listings from Supabase:", error.message);
+    console.error('Error fetching livestock listings:', error);
+    return [];
   }
+  return data || [];
+}
 
-  const listings = dbListings || [];
-
-  // Dynamically count real-time inventory listings for each category
-  const categories = ["Cattle", "Sheep", "Goats", "Pigs", "Poultry"].map((catName) => {
-    const matchingListings = listings.filter(
-      (item) => item.category?.toLowerCase() === catName.toLowerCase()
-    );
-    
-    const totalCount = matchingListings.reduce((sum, item) => sum + (item.inventory_count || 0), 0);
-
-    return {
-      name: catName,
-      count: totalCount,
-      emoji: categoryMeta[catName] || "🚜"
-    };
-  });
+export default async function Home() {
+  const listings = await getFeaturedListings();
 
   return (
-    <div className="bg-[#F8F6F2] w-full overflow-x-hidden relative">
+    <main className="min-h-screen bg-[#FBFBFA]">
       
-      {/* 1. HERO SECTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-20 pb-16 md:pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          <div className="lg:col-span-7 text-center md:text-left order-2 lg:order-1">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#20352E] tracking-tight leading-tight">
+      {/* ================= HERO SECTION ================= */}
+      <section className="relative w-full min-h-[520px] md:min-h-[620px] flex items-center overflow-hidden bg-[#FBFBFA]">
+        
+        {/* Full-Bleed Background Image Layer using your provided URL */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <img
+            src="https://images.unsplash.com/photo-1554755209-85e44182e019?q=80&w=774&auto=format&fit=crop" 
+            alt="Lesotho Highlands Sheep"
+            className="w-full h-full object-cover object-center"
+          />
+          {/* 
+            Intelligent Blend Gradient Overlay:
+            - Mobile: Fades up from solid cream background to ensure text legibility at the bottom stack.
+            - Desktop: Fades from left to right to perfectly mask the text area while showcasing the sheep.
+          */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#FBFBFA] via-[#FBFBFA]/85 to-transparent md:bg-gradient-to-r md:from-[#FBFBFA] md:via-[#FBFBFA]/90 md:to-transparent" />
+        </div>
+
+        {/* Content Container */}
+        <div className="relative max-w-7xl mx-auto w-full px-6 py-12 md:py-20 z-10 grid grid-cols-1 md:grid-cols-2">
+          <div className="flex flex-col items-start space-y-4 max-w-xl mt-auto md:mt-0">
+            
+            {/* Coverage Badge */}
+            <div className="bg-white border border-[#E5E7EB] px-3.5 py-1.5 rounded-xl shadow-xs flex flex-col">
+              <span className="text-[9px] font-black uppercase tracking-wider text-[#6D8077] leading-none">Coverage</span>
+              <span className="text-xs font-bold text-[#3D7A5E] mt-0.5">100% Nationwide Lesotho</span>
+            </div>
+
+            {/* Typography */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#20352E] tracking-tight leading-[1.1]">
               Lesotho’s Trusted <br />
               <span className="text-[#3D7A5E]">Livestock Marketplace</span>
             </h1>
-            <p className="mt-6 text-[#3F564C] text-base sm:text-lg font-medium leading-relaxed max-w-2xl mx-auto md:mx-0">
+
+            <p className="text-sm md:text-base font-medium text-[#6D8077] leading-relaxed max-w-md">
               Buy and sell livestock through verified listings, supervised viewings, and direct WhatsApp support.
             </p>
-            
-            <div className="mt-8 flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-              <a 
-                href="#listings" 
-                className="inline-block text-center bg-[#3D7A5E] text-white px-8 py-4 rounded-xl font-black text-sm tracking-wide shadow-xs hover:bg-[#285F44] transition-all transform active:scale-95"
-              >
+
+            {/* CTA Interaction Buttons */}
+            <div className="pt-2 flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+              <button className="bg-[#3D7A5E] hover:bg-[#285F44] text-white font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 shadow-xs text-center active:scale-[0.98]">
                 Browse Livestock
-              </a>
-              <a 
-                href="https://wa.me/26658566600?text=Hi%20Sakeng%2C%20I%20want%20to%20sell%20my%20livestock." 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block text-center bg-white text-[#20352E] border-2 border-[#20352E] px-8 py-4 rounded-xl font-black text-sm tracking-wide shadow-2xs hover:bg-zinc-50 transition-all transform active:scale-95"
-              >
+              </button>
+              <button className="bg-white hover:bg-zinc-50 border border-[#CCCECD] text-[#20352E] font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 shadow-xs text-center active:scale-[0.98]">
                 Sell Your Livestock
-              </a>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ================= VALUES / TRUST FEATURES SECTION ================= */}
+      <section className="bg-white border-y border-[#E5E7EB] py-6 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-zinc-100">
+          
+          <div className="flex items-start space-x-3.5 pb-4 md:pb-0">
+            <div className="text-2xl text-[#3D7A5E] mt-0.5">🛡️</div>
+            <div>
+              <h4 className="text-sm font-bold text-[#20352E]">Verified Listings</h4>
+              <p className="text-xs font-medium text-[#6D8077] mt-0.5">All listings are verified by Sakeng.</p>
             </div>
           </div>
 
-          <div className="lg:col-span-5 order-1 lg:order-2">
-            <div className="relative w-full h-64 sm:h-80 lg:h-[340px] rounded-[2rem] overflow-hidden border-4 border-white shadow-md transform lg:rotate-1 hover:rotate-0 transition-transform duration-300">
-              <img 
-                src="https://images.unsplash.com/photo-1484557985045-edf25e08da73?auto=format&fit=crop&w=1000&q=80" 
-                alt="Premium Quality Livestock Sheep Lesotho"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#20352E]/30 to-transparent"></div>
-              <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-xs py-2 px-4 rounded-xl border border-[#E5E7EB]">
-                <span className="text-[10px] font-black tracking-wider text-[#20352E] uppercase block">Coverage</span>
-                <span className="text-xs font-bold text-[#3D7A5E] block">100% Nationwide Lesotho</span>
-              </div>
+          <div className="flex items-start space-x-3.5 pt-4 md:pt-0 md:pl-6 pb-4 md:pb-0">
+            <div className="text-2xl text-[#3D7A5E] mt-0.5">👥</div>
+            <div>
+              <h4 className="text-sm font-bold text-[#20352E]">Supervised Viewings</h4>
+              <p className="text-xs font-medium text-[#6D8077] mt-0.5">Safe, transparent, and professional.</p>
+            </div>
+          </div>
+
+          <div className="flex items-start space-x-3.5 pt-4 md:pt-0 md:pl-6">
+            <div className="text-2xl text-[#3D7A5E] mt-0.5">💬</div>
+            <div>
+              <h4 className="text-sm font-bold text-[#20352E]">Direct WhatsApp Support</h4>
+              <p className="text-xs font-medium text-[#6D8077] mt-0.5">Chat directly with our team or sellers.</p>
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* 2. WHY BUYERS AND SELLERS TRUST SAKENG */}
-      <section className="bg-white border-y border-[#E5E7EB] py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-2xl md:text-3xl font-black text-[#20352E] tracking-tight">
-              Why Buyers and Sellers Trust Sakeng
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: "Trusted Marketplace", desc: "A simple and transparent way to buy and sell livestock." },
-              { title: "Verified Livestock", desc: "Selected livestock is checked before being listed." },
-              { title: "Supervised Viewings", desc: "We help arrange and supervise viewings for added peace of mind." },
-              { title: "WhatsApp Support", desc: "Our team is available to answer your questions and guide you through the process." }
-            ].map((item, idx) => (
-              <div key={idx} className="bg-[#F8F6F2]/50 border border-[#E5E7EB] p-6 rounded-2xl">
-                <div className="w-8 h-8 rounded-lg bg-[#3D7A5E]/10 flex items-center justify-center text-[#3D7A5E] font-black text-sm mb-4">
-                  ✓
-                </div>
-                <h4 className="font-bold text-base text-[#20352E]">{item.title}</h4>
-                <p className="text-xs text-[#3F564C] mt-2 font-medium leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. LATEST LIVESTOCK */}
-      <section id="listings" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-20">
-        <div className="mb-10 text-center md:text-left">
-          <h2 className="text-2xl md:text-3xl font-black text-[#20352E] tracking-tight">
-            Latest Livestock
+      {/* ================= FEATURED LIVESTOCK GRID ================= */}
+      <section className="max-w-7xl mx-auto px-6 py-12">
+        <div className="flex justify-between items-baseline mb-6">
+          <h2 className="text-xl md:text-2xl font-black text-[#20352E] tracking-tight">
+            Featured Livestock
           </h2>
-          <p className="text-[#6D8077] text-sm mt-1 font-semibold">
-            Browse some of the latest verified livestock currently available across Lesotho.
-          </p>
+          <button className="text-xs font-bold text-[#3D7A5E] hover:text-[#285F44] flex items-center space-x-1 transition-colors">
+            <span>View All Livestock</span>
+            <span>→</span>
+          </button>
         </div>
 
         {listings.length === 0 ? (
-          <div className="text-center py-12 bg-white rounded-2xl border border-[#E5E7EB] w-full">
-            <p className="text-sm font-bold text-[#6D8077]">No livestock listings available right now. Check back soon!</p>
+          <div className="bg-white border border-[#E5E7EB] rounded-2xl p-12 text-center">
+            <p className="text-sm font-medium text-[#6D8077]">No live listings available right now. Check back soon!</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center md:justify-items-start">
-            {listings.slice(0, 4).map((listing) => (
+          /* High-density grid tailored for our beautiful, tight, non-screen-filling cards */
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+            {listings.map((listing) => (
               <LivestockCard key={listing.id} listing={listing} />
             ))}
           </div>
         )}
-
-        <div className="mt-12 text-center">
-          <button className="inline-flex items-center space-x-2 bg-white text-[#20352E] border-2 border-[#20352E] font-black text-sm px-8 py-4 rounded-xl hover:bg-zinc-50 transition-all shadow-2xs transform active:scale-95">
-            <span>View All Livestock</span>
-            <span>➔</span>
-          </button>
-        </div>
       </section>
 
-      {/* 4. BROWSE BY CATEGORY */}
-      <section className="bg-white border-y border-[#E5E7EB] py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-8 text-center md:text-left">
-            <h2 className="text-2xl md:text-3xl font-black text-[#20352E] tracking-tight">
-              Browse by Category
-            </h2>
-            <p className="text-[#6D8077] text-sm mt-1 font-semibold">
-              Choose a category to explore available livestock across Lesotho.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-            {categories.map((cat) => (
-              <button 
-                key={cat.name} 
-                className="bg-[#F8F6F2] hover:bg-[#3D7A5E] hover:text-white border border-[#E5E7EB] text-[#20352E] group p-5 rounded-2xl transition-all text-center flex flex-col items-center justify-center space-y-2"
-              >
-                <span className="text-2xl">{cat.emoji}</span>
-                <span className="block font-bold text-sm group-hover:text-white">{cat.name}</span>
-                <span className="inline-block text-[10px] bg-white text-[#6D8077] group-hover:bg-black/10 group-hover:text-white px-2 py-0.5 rounded-full font-black">
-                  {cat.count}
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 5. HOW SAKENG WORKS? */}
-      <section id="how-it-works" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-20">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-2xl md:text-3xl font-black text-[#20352E] tracking-tight">
-            How Sakeng works?
-          </h2>
-          <p className="text-[#3F564C] text-sm mt-1 font-semibold">
-            Buying or selling livestock is simple with Sakeng.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white border border-[#E5E7EB] p-8 rounded-2xl">
-            <div className="w-10 h-10 rounded-xl bg-[#3D7A5E]/10 text-[#3D7A5E] flex items-center justify-center font-black text-sm mb-4">1</div>
-            <h3 className="text-lg font-bold text-[#20352E]">Browse</h3>
-            <p className="text-xs text-[#3F564C] mt-2 font-medium leading-relaxed">View available livestock across Lesotho.</p>
-          </div>
-
-          <div className="bg-white border border-[#E5E7EB] p-8 rounded-2xl">
-            <div className="w-10 h-10 rounded-xl bg-[#3D7A5E]/10 text-[#3D7A5E] flex items-center justify-center font-black text-sm mb-4">2</div>
-            <h3 className="text-lg font-bold text-[#20352E]">Contact Us</h3>
-            <p className="text-xs text-[#3F564C] mt-2 font-medium leading-relaxed">Message us on WhatsApp. We’ll answer your questions and connect you with the seller.</p>
-          </div>
-
-          <div className="bg-white border border-[#E5E7EB] p-8 rounded-2xl">
-            <div className="w-10 h-10 rounded-xl bg-[#3D7A5E]/10 text-[#3D7A5E] flex items-center justify-center font-black text-sm mb-4">3</div>
-            <h3 className="text-lg font-bold text-[#20352E]">Meet & Buy</h3>
-            <p className="text-xs text-[#3F564C] mt-2 font-medium leading-relaxed mb-4">For eligible livestock, Sakeng helps make the buying process more secure.</p>
-            <div className="border-t border-[#E5E7EB] pt-4 space-y-2 text-[11px] text-[#3F564C] font-medium">
-              <p className="text-[#6D8077] italic font-semibold mb-2">*Applies to selected livestock only. Eligible listings are marked with the Sakeng Verified badge.</p>
-              <div className="flex items-start space-x-2">
-                <span className="text-[#3D7A5E] font-black">•</span>
-                <p>Book a supervised viewing with the Sakeng team.</p>
-              </div>
-              <div className="flex items-start space-x-2">
-                <span className="text-[#3D7A5E] font-black">•</span>
-                <p>Pay a refundable 5% commitment fee to reserve your viewing.</p>
-              </div>
-              <div className="flex items-start space-x-2">
-                <span className="text-[#3D7A5E] font-black">•</span>
-                <p><span className="font-bold text-[#20352E]">Buy with confidence</span> - If you purchase the livestock, your commitment fee is deducted from the purchase price.</p>
-              </div>
-              <div className="flex items-start space-x-2">
-                <span className="text-[#3D7A5E] font-black">•</span>
-                <p><span className="font-bold text-[#20352E]">Protected if things don’t match</span> - If the animal does not match its listing, your commitment fee is fully refunded.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. OUR MISSION */}
-      <section className="bg-[#20352E] text-white py-16 text-center">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <span className="text-[10px] font-black tracking-widest text-[#3D7A5E] uppercase block mb-3">Our Mission</span>
-          <p className="text-xl sm:text-2xl font-medium tracking-tight text-zinc-100 max-w-2xl mx-auto leading-relaxed">
-            We’re building a safer and more transparent way to buy and sell livestock in Lesotho through verified listings, supervised viewings, and direct support.
-          </p>
-        </div>
-      </section>
-
-    </div>
+    </main>
   );
 }
