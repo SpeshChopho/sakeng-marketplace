@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { supabase } from './utils/supabase'; 
 import LivestockCard from './components/LivestockCard';
 
@@ -40,7 +41,8 @@ export default async function Home() {
             alt="Lesotho Highland Sheep Portrait"
             className="w-full h-full object-cover object-center md:object-[right_25%]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#FBFBFA] via-[#FBFBFA]/70 to-transparent md:bg-gradient-to-r md:from-[#FBFBFA] md:via-[#FBFBFA]/60 md:to-transparent md:w-[65%]" />
+          {/* Fix 5: Reduced backdrop filter gradient cover mask by exactly 5% opacity */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#FBFBFA] via-[#FBFBFA]/65 to-transparent md:bg-gradient-to-r md:from-[#FBFBFA] md:via-[#FBFBFA]/65 md:to-transparent md:w-[65%]" />
         </div>
 
         <div className="relative max-w-7xl mx-auto w-full px-6 pt-12 pb-4 md:pt-20 md:pb-4 z-10 grid grid-cols-1 md:grid-cols-2">
@@ -54,13 +56,14 @@ export default async function Home() {
               Buy and sell livestock through verified listings, supervised viewings, and direct WhatsApp support.
             </p>
 
+            {/* Fix 1: Active Router Anchor CTAs */}
             <div className="pt-2 flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-              <button className="bg-[#3D7A5E] hover:bg-[#285F44] text-white font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 shadow-xs text-center active:scale-[0.98]">
+              <Link href="/browse" className="bg-[#3D7A5E] hover:bg-[#285F44] text-white font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 shadow-xs text-center active:scale-[0.98]">
                 Browse Livestock
-              </button>
-              <button className="bg-white hover:bg-zinc-50 border border-[#20352E] text-[#20352E] font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 shadow-xs text-center active:scale-[0.98]">
+              </Link>
+              <Link href="/sell" className="bg-white hover:bg-zinc-50 border border-[#20352E] text-[#20352E] font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 shadow-xs text-center active:scale-[0.98]">
                 Sell Your Livestock
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -125,9 +128,10 @@ export default async function Home() {
             {/* WhatsApp Support */}
             <div className="flex items-start space-x-3.5 pt-6 sm:pt-6 lg:pt-0 lg:px-4 lg:last:pr-0 h-full">
               <div className="text-[#3D7A5E] shrink-0 pt-0.5">
+                {/* Fix 4: Flawless symmetrical line-art WhatsApp icon */}
                 <svg className="w-6 h-6 stroke-current" fill="none" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 10-9-9c0 1.48.36 2.88 1 4.1L3 21l4.9-1c1.2.64 2.58 1 4.1 1z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.5 9.2c.2-.5.5-.5.8-.5s.4 0 .6.3c.2.2.6 1.4.6 1.6s0 .3-.1.4c-.1.2-.2.3-.3.4-.1.1-.2.3 0 .6.2.4.5.6.8.9.4.3.8.5 1.1.7.3.1.4.1.6-.1.2-.2.8-.9 1-.1.2.3.4.2.6.2s1.5.8 1.6.9c.1.1.1.2.1.3-.1.4-.4.8-.7.9-.3.2-.7.2-1.5-.1-1.1-.4-1.8-1.5-1.9-1.6 0-.1-.6-.8-.6-1.5 0-.7.3-1 .5-1.2z" />
+                  <path strokeLinecap="round" d="M12 21a9 9 0 0 0 4.1-.98L21 21l-1-4.9A9 9 0 1 0 12 21z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.2 9.5c.2-.4.4-.4.7-.4.2 0 .4.1.5.3.2.3.5 1.2.5 1.3 0 .2-.1.3-.2.4-.1.1-.2.2-.3.4-.1.1-.1.2 0 .4.2.4.5.7.8.9.4.3.7.4 1 .5.2.1.3 0 .4-.1.1-.2.5-.6.7-.8.1-.1.3-.1.5 0 .2.1 1.2.6 1.3.6.1 0 .2.1.2.3-.1.4-.3.7-.6.8-.3.2-.6.2-1.3-.1-.9-.3-1.5-1.1-1.6-1.2 0 0-.5-.7-.5-1.3 0-.6.3-.9.4-1z" />
                 </svg>
               </div>
               <div className="flex flex-col space-y-1">
@@ -166,10 +170,10 @@ export default async function Home() {
             </div>
             
             <div className="mt-8 flex justify-start">
-              <button className="text-xs font-bold text-[#3D7A5E] hover:text-[#285F44] border border-[#3D7A5E]/20 hover:border-[#285F44] bg-white px-5 py-2.5 rounded-xl flex items-center space-x-1.5 transition-all shadow-2xs active:scale-[0.98]">
+              <Link href="/browse" className="text-xs font-bold text-[#3D7A5E] hover:text-[#285F44] border border-[#3D7A5E]/20 hover:border-[#285F44] bg-white px-5 py-2.5 rounded-xl flex items-center space-x-1.5 transition-all shadow-2xs active:scale-[0.98]">
                 <span>View All Livestock</span>
                 <span>→</span>
-              </button>
+              </Link>
             </div>
           </>
         )}
@@ -206,9 +210,10 @@ export default async function Home() {
 
       {/* ================= 5. HOW SAKENG WORKS? ================= */}
       <section className="max-w-7xl mx-auto px-6 py-14 border-t border-[#E5E7EB]">
+        {/* Fix 6: Capitalized 'Works' */}
         <div className="text-left max-w-xl mb-10">
           <h2 className="text-xl md:text-2xl font-black text-[#20352E] tracking-tight">
-            How Sakeng works?
+            How Sakeng Works?
           </h2>
           <p className="text-xs font-medium text-[#6D8077] mt-1">
             Buying or selling livestock is simple with Sakeng.
