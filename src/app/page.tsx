@@ -31,7 +31,8 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-[#FBFBFA]">
       
-      {/* ================= HERO SECTION ================= */}
+      {/* ================= 1. HERO SECTION ================= */}
+      {/* Reduced bottom padding from pb-8/pb-12 to pb-4/pb-6 */}
       <section className="relative w-full min-h-[500px] md:min-h-[580px] flex items-center overflow-hidden bg-[#FBFBFA]">
         <div className="absolute inset-0 w-full h-full z-0">
           <img
@@ -42,7 +43,7 @@ export default async function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#FBFBFA] via-[#FBFBFA]/70 to-transparent md:bg-gradient-to-r md:from-[#FBFBFA] md:via-[#FBFBFA]/60 md:to-transparent md:w-[65%]" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto w-full px-6 pt-12 pb-8 md:pt-20 md:pb-12 z-10 grid grid-cols-1 md:grid-cols-2">
+        <div className="relative max-w-7xl mx-auto w-full px-6 pt-12 pb-4 md:pt-20 md:pb-6 z-10 grid grid-cols-1 md:grid-cols-2">
           <div className="flex flex-col items-start space-y-5 max-w-xl mt-auto md:mt-0">
             <div className="bg-white border border-[#E5E7EB] px-3.5 py-1.5 rounded-xl shadow-xs flex flex-col">
               <span className="text-[9px] font-black uppercase tracking-wider text-[#6D8077] leading-none">Coverage</span>
@@ -70,11 +71,10 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ================= PROUDLY SAKENG VALUE PROPOSITION SECTION ================= */}
-      <section className="bg-[#F4F6F5] border-y border-[#E5E7EB] py-12 px-6">
+      {/* ================= 2. WHY CHOOSE SAKENG ================= */}
+      {/* Reduced top padding from pt-12 to pt-6 to close the gap with Hero */}
+      <section className="bg-[#F4F6F5] border-y border-[#E5E7EB] pt-6 pb-12 px-6">
         <div className="max-w-7xl mx-auto">
-          
-          {/* Re-elevated Section Heading */}
           <div className="text-center md:text-left mb-10">
             <h2 className="text-2xl font-black text-[#20352E] tracking-tight">
               Why Choose Sakeng
@@ -128,12 +128,42 @@ export default async function Home() {
               </div>
             </div>
           </div>
-
         </div>
       </section>
 
-      {/* ================= BROWSE BY CATEGORY SECTION ================= */}
+      {/* ================= 3. FEATURED LIVESTOCK ================= */}
       <section className="max-w-7xl mx-auto px-6 py-12">
+        <div className="mb-6">
+          <h2 className="text-xl md:text-2xl font-black text-[#20352E] tracking-tight">
+            Featured Livestock
+          </h2>
+        </div>
+
+        {listings.length === 0 ? (
+          <div className="bg-white border border-[#E5E7EB] rounded-2xl p-12 text-center">
+            <p className="text-sm font-medium text-[#6D8077]">No live listings available right now. Check back soon!</p>
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+              {listings.map((listing: any) => (
+                <LivestockCard key={listing.id} listing={listing} />
+              ))}
+            </div>
+            
+            {/* CTA Button repositioned cleanly underneath the listing grid */}
+            <div className="mt-8 flex justify-center">
+              <button className="text-xs font-bold text-[#3D7A5E] hover:text-[#285F44] border border-[#3D7A5E]/20 hover:border-[#285F44] bg-white px-5 py-2.5 rounded-xl flex items-center space-x-1.5 transition-all shadow-2xs active:scale-[0.98]">
+                <span>View All Livestock</span>
+                <span>→</span>
+              </button>
+            </div>
+          </>
+        )}
+      </section>
+
+      {/* ================= 4. BROWSE BY CATEGORY ================= */}
+      <section className="max-w-7xl mx-auto px-6 py-6 mb-6">
         <h2 className="text-xl md:text-2xl font-black text-[#20352E] tracking-tight mb-6">
           Browse by Category
         </h2>
@@ -151,33 +181,8 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ================= FEATURED LIVESTOCK GRID ================= */}
-      <section className="max-w-7xl mx-auto px-6 py-6">
-        <div className="flex justify-between items-baseline mb-6">
-          <h2 className="text-xl md:text-2xl font-black text-[#20352E] tracking-tight">
-            Featured Livestock
-          </h2>
-          <button className="text-xs font-bold text-[#3D7A5E] hover:text-[#285F44] flex items-center space-x-1 transition-colors">
-            <span>View All Livestock</span>
-            <span>→</span>
-          </button>
-        </div>
-
-        {listings.length === 0 ? (
-          <div className="bg-white border border-[#E5E7EB] rounded-2xl p-12 text-center">
-            <p className="text-sm font-medium text-[#6D8077]">No live listings available right now. Check back soon!</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
-            {listings.map((listing: any) => (
-              <LivestockCard key={listing.id} listing={listing} />
-            ))}
-          </div>
-        )}
-      </section>
-
-      {/* ================= HOW SAKENG WORKS SECTION ================= */}
-      <section className="max-w-7xl mx-auto px-6 py-16 border-t border-[#E5E7EB] mt-12">
+      {/* ================= 5. HOW SAKENG WORKS ================= */}
+      <section className="max-w-7xl mx-auto px-6 py-16 border-t border-[#E5E7EB]">
         <div className="text-center max-w-xl mx-auto mb-12">
           <h2 className="text-2xl md:text-3xl font-black text-[#20352E] tracking-tight">
             How Sakeng Works
