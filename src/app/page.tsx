@@ -75,13 +75,12 @@ export default async function Home() {
             </h2>
           </div>
 
-          {/* Added divide-x and divide-[#E5E7EB] for subtle separating borders on desktop */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-8 lg:gap-y-0 lg:divide-x lg:divide-[#E5E7EB]">
+          {/* Grid layout with clean border lines serving both mobile stacks and desktop grids seamlessly */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             
             {/* Trusted Marketplace */}
-            <div className="flex items-start space-x-3.5 lg:px-4 lg:first:pl-0">
+            <div className="flex items-start space-x-3.5 pb-6 sm:pb-8 lg:pb-0 lg:px-4 lg:first:pl-0 border-b sm:border-b-0 sm:border-r border-[#E5E7EB] lg:border-b-0 h-full">
               <div className="text-[#3D7A5E] shrink-0 pt-0.5">
-                {/* Shield + Checkmark icon moved here */}
                 <svg className="w-6 h-6 stroke-current" fill="none" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
@@ -95,9 +94,8 @@ export default async function Home() {
             </div>
 
             {/* Verified Livestock */}
-            <div className="flex items-start space-x-3.5 lg:px-4">
+            <div className="flex items-start space-x-3.5 pt-6 pb-6 sm:pt-0 sm:pb-8 lg:pb-0 lg:pt-0 lg:px-4 border-b lg:border-b-0 lg:border-r border-[#E5E7EB] h-full">
               <div className="text-[#3D7A5E] shrink-0 pt-0.5">
-                {/* Ribbon Certificate / Award Badge outline with checkmark inside */}
                 <svg className="w-6 h-6 stroke-current" fill="none" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M12 14a4.5 4.5 0 110-9 4.5 4.5 0 010 9zm-3.75 1.5L6 21l3-1.5L12 21l1.5-1.5L15 21l-2.25-5.5" />
                 </svg>
@@ -111,7 +109,7 @@ export default async function Home() {
             </div>
 
             {/* Supervised Viewings */}
-            <div className="flex items-start space-x-3.5 lg:px-4">
+            <div className="flex items-start space-x-3.5 pt-6 pb-6 sm:pt-6 sm:pb-0 lg:pt-0 lg:px-4 border-b sm:border-b-0 sm:border-r border-[#E5E7EB] h-full">
               <div className="text-[#3D7A5E] shrink-0 pt-0.5">
                 <svg className="w-6 h-6 fill-none stroke-current" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -126,11 +124,12 @@ export default async function Home() {
             </div>
 
             {/* WhatsApp Support */}
-            <div className="flex items-start space-x-3.5 lg:px-4 lg:last:pr-0">
+            <div className="flex items-start space-x-3.5 pt-6 sm:pt-6 lg:pt-0 lg:px-4 lg:last:pr-0 h-full">
               <div className="text-[#3D7A5E] shrink-0 pt-0.5">
-                {/* Refined accurate open line-art WhatsApp icon */}
+                {/* Fixed crisp geometric minimalist WhatsApp icon matching image.png */}
                 <svg className="w-6 h-6 stroke-current" fill="none" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5zM10.5 9.5c.2-.4.5-.4.8-.4s.4 0 .6.3c.2.2.7 1.7.7 1.8s0 .3-.2.5c-.2.2-.3.3-.4.5-.1.1-.3.3 0 .7.2.4.5.7.9 1 .5.4.9.6 1.3.8.3.1.5.1.7-.1.2-.2.9-1 1.1-1.4.2-.3.4-.2.7-.1s1.8.9 1.9 1c.1.1.2.2.1.4c-.1.5-.5.9-.9 1.1-.3.2-.8.3-1.8-.1-1.3-.5-2.1-1.8-2.2-2-.1-.1-.7-.9-.7-1.7 0-.8.4-1.2.6-1.4z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 10-9-9c0 1.48.36 2.88 1 4.1L3 21l4.9-1c1.2.64 2.58 1 4.1 1z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.5 9.2c.2-.5.5-.5.8-.5s.4 0 .6.3c.2.2.6 1.4.6 1.6s0 .3-.1.4c-.1.2-.2.3-.3.4-.1.1-.2.3 0 .6.2.4.5.6.8.9.4.3.8.5 1.1.7.3.1.4.1.6-.1.2-.2.8-.9 1-.1.2.3.4.2.6.2s1.5.8 1.6.9c.1.1.1.2.1.3-.1.4-.4.8-.7.9-.3.2-.7.2-1.5-.1-1.1-.4-1.8-1.5-1.9-1.6 0-.1-.6-.8-.6-1.5 0-.7.3-1 .5-1.2z" />
                 </svg>
               </div>
               <div className="flex flex-col space-y-1">
