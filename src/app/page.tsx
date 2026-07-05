@@ -63,9 +63,15 @@ export default async function Home() {
               <Link href="/browse" className="bg-[#3D7A5E] hover:bg-[#285F44] text-white font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 shadow-xs text-center active:scale-[0.98]">
                 Browse Livestock
               </Link>
-              <Link href="#how-it-works" className="bg-white hover:bg-zinc-50 border border-[#20352E] text-[#20352E] font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 shadow-xs text-center active:scale-[0.98]">
+              {/* FIXED WHATSAPP LINK FOR HERO SECTION */}
+              <a 
+                href="https://wa.me/26658566600?text=Hi%20Sakeng%2C%20I%20want%20to%20sell%20my%20livestock." 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="bg-white hover:bg-zinc-50 border border-[#20352E] text-[#20352E] font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 shadow-xs text-center active:scale-[0.98]"
+              >
                 Sell Your Livestock
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -221,8 +227,9 @@ export default async function Home() {
             </p>
           </div>
           <div className="shrink-0 flex">
+            {/* FIXED WHATSAPP LINK FOR SOURCING SECTION */}
             <a 
-              href={`https://wa.me/266XXXXXXXX?text=${whatsappSourcingMessage}`}
+              href={`https://wa.me/26658566600?text=${whatsappSourcingMessage}`}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#20352E] hover:bg-[#3D7A5E] text-white font-bold text-xs px-5 py-3 rounded-xl transition-all shadow-xs text-center active:scale-[0.98] w-full md:w-auto"
