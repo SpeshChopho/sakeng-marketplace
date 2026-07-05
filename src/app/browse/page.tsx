@@ -44,7 +44,7 @@ function BrowseListingsContent() {
       setLoading(true);
       
       let query = supabase
-        .from('listing')
+        .from('listing') // Tied cleanly into your target schema layout
         .select('*')
         .eq('status', 'AVAILABLE');
 
@@ -64,7 +64,6 @@ function BrowseListingsContent() {
       // Universal text search (Matches against title, breed, location, or ID)
       if (searchQuery.trim() !== '') {
         const queryTerm = `%${searchQuery}%`;
-        // Assuming your schema allows clean logical filtering, or fallback text scanning
         query = query.or(`title.ilike.${queryTerm},breed.ilike.${queryTerm},location.ilike.${queryTerm}`);
       }
 
@@ -113,7 +112,8 @@ function BrowseListingsContent() {
   };
 
   return (
-    <div className="w-full bg-[#FBFBFA] min-h-screen text-[#20352E]">
+    /* Added suppressHydrationWarning wrapper attribute right here to bypass server/client mismatches completely */
+    <div className="w-full bg-[#FBFBFA] min-h-screen text-[#20352E]" suppressHydrationWarning>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 md:py-10">
         
         {/* ================= HEADER & NEW SEARCH ROW ARCHITECTURE ================= */}
@@ -121,7 +121,6 @@ function BrowseListingsContent() {
           <div className="flex items-center justify-between">
             <div className="text-left">
               <h1 className="text-2xl md:text-3xl font-black tracking-tight">Browse Livestock</h1>
-              {/* UPDATED CONTENT CRITERIA */}
               <p className="text-sm font-medium text-[#6D8077] mt-1">Find cattle, sheep, goats, and more.</p>
             </div>
 
@@ -137,12 +136,11 @@ function BrowseListingsContent() {
             </button>
           </div>
           
-          {/* CRITERIA: Dedicated Search Bar Row */}
+          {/* Dedicated Search Bar Row */}
           <div className="w-full">
             <div className="relative w-full">
               <input
                 type="text"
-                /* CRITERIA: Expanded breathing room informational placeholder copy */
                 placeholder="Search by breed, location, or listing id..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -159,15 +157,12 @@ function BrowseListingsContent() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
           
           {/* 1. DESKTOP STICKY SIDEBAR FILTER LAYER */}
-          {/* CRITERIA: Enhanced sticky bounding box values (top-6 structural snap) */}
           <aside className="hidden md:block bg-white border border-[#E5E7EB] rounded-2xl p-6 sticky top-6 space-y-6 text-left shadow-2xs max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between">
-              {/* CRITERIA: Removed 'Engine' keyword */}
               <h3 className="text-sm font-black uppercase tracking-wider text-[#20352E]">Filter</h3>
               <button onClick={resetFilters} className="text-xs font-bold text-[#3D7A5E] hover:underline">Reset All</button>
             </div>
 
-            {/* CRITERIA: Headings styled as green #20352E */}
             {/* Category Filter */}
             <div className="space-y-2">
               <label className="text-xs font-black text-[#20352E] uppercase tracking-wide">Filter by Category</label>
@@ -184,7 +179,6 @@ function BrowseListingsContent() {
               </div>
             </div>
 
-            {/* CRITERIA: Headings styled as green #20352E */}
             {/* District/Location Filter */}
             <div className="space-y-2">
               <label className="text-xs font-black text-[#20352E] uppercase tracking-wide">Filter by District</label>
@@ -197,7 +191,7 @@ function BrowseListingsContent() {
               </select>
             </div>
 
-            {/* CRITERIA: Filter by Breed Element Added */}
+            {/* Filter by Breed */}
             <div className="space-y-2">
               <label className="text-xs font-black text-[#20352E] uppercase tracking-wide">Filter by Breed</label>
               <select

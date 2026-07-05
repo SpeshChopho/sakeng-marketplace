@@ -60,7 +60,6 @@ export default async function Home() {
             </p>
 
             <div className="pt-2 flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-              {/* FIXED LINK: Directed anchor parameter out to /browse instead of a page fragment jump */}
               <Link href="/browse" className="bg-[#3D7A5E] hover:bg-[#285F44] text-white font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 shadow-xs text-center active:scale-[0.98]">
                 Browse Livestock
               </Link>
@@ -168,7 +167,6 @@ export default async function Home() {
             </div>
             
             <div className="mt-8 flex justify-center md:justify-start">
-              {/* CONNECTED LINK: This cleanly maps to our dynamic /browse page */}
               <Link href="/browse" className="text-xs font-bold text-[#3D7A5E] hover:text-[#285F44] border border-[#3D7A5E]/20 hover:border-[#285F44] bg-white px-5 py-2.5 rounded-xl flex items-center space-x-1.5 transition-all shadow-2xs active:scale-[0.98]">
                 <span>View All Livestock</span>
                 <span>→</span>
@@ -195,6 +193,7 @@ export default async function Home() {
               key={cat.name} 
               href={`/browse?category=${cat.name}`}
               className="bg-white border border-[#E5E7EB] rounded-2xl py-3 px-4 flex flex-col items-start cursor-pointer hover:shadow-xs hover:border-[#3D7A5E] transition-all group min-h-[105px] justify-between"
+              suppressHydrationWarning
             >
               <span className="text-3xl mb-1 group-hover:scale-110 transition-transform">{cat.icon}</span>
               <div>

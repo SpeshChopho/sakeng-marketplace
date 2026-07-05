@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Footer() {
   return (
     <footer id="contact" className="bg-white text-[#6D8077] border-t border-[#E5E7EB] pt-12 pb-8 mt-auto scroll-mt-20">
@@ -17,10 +19,14 @@ export default function Footer() {
           <div className="md:col-span-3 space-y-2">
             <h4 className="text-xs font-black text-[#20352E] uppercase tracking-wider">Explore</h4>
             <div className="flex flex-col space-y-1.5 text-xs font-semibold text-[#3F564C]">
-              <a href="#" className="hover:text-[#20352E] transition-colors">Home</a>
-              <a href="#listings" className="hover:text-[#20352E] transition-colors">Browse Livestock</a>
+              {/* FIXED LINK: Navigates back home dynamically */}
+              <Link href="/" className="hover:text-[#20352E] transition-colors">Home</Link>
+              
+              {/* FIXED LINK: Re-mapped away from old anchor tags to the clean standalone /browse route */}
+              <Link href="/browse" className="hover:text-[#20352E] transition-colors">Browse Livestock</Link>
+              
               <a href="https://wa.me/26658566600?text=Hi%20Sakeng%2C%20I%20want%20to%20sell%20my%20livestock." target="_blank" rel="noopener noreferrer" className="hover:text-[#20352E] transition-colors">Sell Your Livestock</a>
-              <a href="#how-it-works" className="hover:text-[#20352E] transition-colors">How Sakeng Works</a>
+              <Link href="/#how-it-works" className="hover:text-[#20352E] transition-colors">How Sakeng Works</Link>
             </div>
           </div>
 
@@ -61,8 +67,8 @@ export default function Footer() {
             <p>&copy; 2026 Sakeng Livestock. All rights reserved.</p>
           </div>
           <div className="flex space-x-6 font-semibold text-[#3F564C]">
-            <a href="#" className="hover:text-[#20352E] transition-colors">Privacy policy</a>
-            <a href="#" className="hover:text-[#20352E] transition-colors">Terms of service</a>
+            <Link href="/" className="hover:text-[#20352E] transition-colors">Privacy policy</Link>
+            <Link href="/" className="hover:text-[#20352E] transition-colors">Terms of service</Link>
           </div>
         </div>
       </div>
